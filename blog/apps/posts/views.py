@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+from blog.apps.posts.models import Post
+
+
+class PostDetailView(TemplateView):
+    template_name = 'post/detail_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post_id = self.kwargs.get('post_id')
+        context['post'] = Post.objects.get(id=post_id)
+        return context

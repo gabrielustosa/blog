@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="pt-3 text-center">{{ post.title }}</h1>
+        <img src="{{ post.image.url }}" alt="Imagem do post {{ post.title }}" class="img-fluid mx-auto d-block">
+        <div class="text-center pt-3 font-bold">
+            Post publicado por {{ post.author.name }} - {{ post.created }}
+        </div>
+        <div class="text-center pt-2">
+            {{ post.category }}
+        </div>
+        <div class="pt-3 pb-3">
+            <p class="text-justify">
+                {{ post.content }}
+            </p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,10 +1,9 @@
 from django.urls import reverse
 
-from blog.apps.test_base import PostTestBase
+from blog.apps.posts.tests.test_base import PostTestBase
 
 
-class TestPageView(PostTestBase):
-
+class PageViewTest(PostTestBase):
     def setUp(self):
         self.url = reverse('page:home')
         self.response = self.client.get(self.url)
