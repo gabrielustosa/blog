@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Página inicial
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for post in posts %}
+                <div class="col">
+                    <div class="card pt-3" style="width: 18rem;">
+                        <a href="#" class="text-decoration-none">
+                            <img class="card-img-top" src="{{ post.image.url }}" alt="Post image">
+                            <div class="card-body" style="color: black;">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.description }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
