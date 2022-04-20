@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Editando Perfil
+{% endblock %}
+
+{% block content %}
+    <div class="container pt-5">
+        <form method="post">
+            {% crispy form %}
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

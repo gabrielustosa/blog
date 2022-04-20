@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Perfil - {{ request.user.first_name }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-6 pt-3">
+                <h2>Informações do Usuário</h2>
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <td>Nome</td>
+                        <td class="text-end">{{ request.user.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>CPF</td>
+                        <td class="text-end">{{ request.user.cpf }}</td>
+                    </tr>
+                    <tr>
+                        <td>Telefone</td>
+                        <td class="text-end">{{ request.user.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td>E-mail</td>
+                        <td class="text-end">{{ request.user.email }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="{% url 'users:edit' %}">
+                    <button class="btn btn-info mt-3">Editar Perfil</button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

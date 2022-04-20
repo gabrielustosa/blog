@@ -33,9 +33,8 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     email = models.EmailField('E-mail', unique=True)
-    is_staff = models.BooleanField('Equipe', default=False)
     name = models.CharField('Nome', max_length=150)
-
+    is_staff = models.BooleanField('Equipe', default=False)
     profile_picture = models.ImageField(null=True)
     birthday = models.DateField(null=True)
     bio = models.TextField(null=True)
@@ -43,6 +42,7 @@ class User(AbstractUser):
     twitter = models.CharField(max_length=50, null=True)
     github = models.CharField(max_length=50, null=True)
     linkedin = models.CharField(max_length=50, null=True)
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
@@ -50,4 +50,5 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
-    objects = UserManager()
+    def first_name(self):
+        return self.name.split(' ')[0]

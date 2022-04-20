@@ -47,8 +47,8 @@
                             Perfil
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Minha conta</a></li>
-                            <li><a class="dropdown-item" href="#">Deslogar</a></li>
+                            <li><a class="dropdown-item" href="{% url 'users:profile' %}">Minha conta</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Deslogar</a></li>
                         </ul>
                     {% else %}
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -56,8 +56,8 @@
                             Login
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Logar</a></li>
-                            <li><a class="dropdown-item" href="#">Registrar</a></li>
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Logar</a></li>
+                            <li><a class="dropdown-item" href="{% url 'users:register' %}">Registrar</a></li>
                         </ul>
                     {% endif %}
                 </li>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block title %}
+    Entrar
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h2>Entrar</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+                {% buttons %}
+                     <button type="submit" class="btn btn-primary">Logar</button>
+                {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}

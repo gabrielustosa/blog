@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}
+    Cadastro
+{% endblock %}
+
+{% block content %}
+    {{ form.non_field_erros }}
+    <div class="container-fluid">
+        <h2>Cadastrar</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}

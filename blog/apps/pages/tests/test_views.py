@@ -18,3 +18,4 @@ class PageViewTest(PostTestBase):
         self.make_post(is_published=False)
         response = self.client.get(self.url)
         self.assertEqual(len(response.context['posts']), 0)
+
