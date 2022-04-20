@@ -16,6 +16,7 @@
         .text-justify {
             text-align: justify;
         }
+
     </style>
 </head>
 <body>
@@ -35,7 +36,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {% for category in categories %}
                             <li><a class="dropdown-item"
-                                   href="#">{{ category }}</a></li>
+                                   href="{% url 'post:category_list' category.id %}">{{ category }}</a></li>
                         {% endfor %}
 
                     </ul>
@@ -62,9 +63,9 @@
                     {% endif %}
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="#">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'post:search' %}">
                 <div class="input-group">
-                    <form method="GET" action="#">
+                    <form>
                         <input name="term" value="{{ request.GET.term }}" class="form-control me-2" type="search"
                                placeholder="Pesquisar"
                                aria-label="Pesquisar">

@@ -6,9 +6,12 @@
 
 {% block content %}
     <div class="container">
-        <div class="row">
+        {% if not posts %}
+            <h2 class="text-center pt-5">Nenhum resultado foi encontrado para sua busca.</h2>
+        {% endif %}
+        <div class="row row-cols-auto">
             {% for post in posts %}
-                <div class="col">
+                <div class="col pb-3">
                     <div class="card pt-3" style="width: 13rem;">
                         <a href="{% url 'post:detail_view' post.id %}" class="text-decoration-none">
                             <img class="card-img-top" src="{{ post.image.url }}" alt="Post image">

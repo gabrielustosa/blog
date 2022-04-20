@@ -7,7 +7,11 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-6 pt-3">
+            <div class="col-2 pt-3">
+                <img src="{{ request.user.profile_picture.url }}" alt="Imagem do post {{ post.title }}"
+                     class="img-fluid rounded-circle" width="200">
+            </div>
+            <div class="col pt-3">
                 <h2>Informações do Usuário</h2>
                 <table class="table table-hover">
                     <tbody>
@@ -16,22 +20,35 @@
                         <td class="text-end">{{ request.user.name }}</td>
                     </tr>
                     <tr>
-                        <td>CPF</td>
-                        <td class="text-end">{{ request.user.cpf }}</td>
+                        <td>Data de nascimento</td>
+                        <td class="text-end">{{ request.user.birthday }}</td>
                     </tr>
                     <tr>
-                        <td>Telefone</td>
-                        <td class="text-end">{{ request.user.phone_number }}</td>
+                        <td>Instagram</td>
+                        <td class="text-end">{{ request.user.instagram }}</td>
                     </tr>
                     <tr>
-                        <td>E-mail</td>
-                        <td class="text-end">{{ request.user.email }}</td>
+                        <td>Twitter</td>
+                        <td class="text-end">{{ request.user.twitter }}</td>
+                    </tr>
+                    <tr>
+                        <td>Github</td>
+                        <td class="text-end">{{ request.user.github }}</td>
+                    </tr>
+                    <tr>
+                        <td>Linkedin</td>
+                        <td class="text-end">{{ request.user.linkedin }}</td>
                     </tr>
                     </tbody>
                 </table>
-                <a href="{% url 'users:edit' %}">
-                    <button class="btn btn-info mt-3">Editar Perfil</button>
-                </a>
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'users:edit' %}">
+                        <button class="btn btn-info mt-3">Editar Perfil</button>
+                    </a>
+                    <a href="{% url 'post:create' %}">
+                        <button class="btn btn-warning mt-3">Criar Post</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
