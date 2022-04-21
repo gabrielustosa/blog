@@ -10,9 +10,6 @@
     <div class="container">
         <h1 class="pt-3 text-center">{{ post.title }}</h1>
         <img src="{{ post.image.url }}" alt="Imagem do post {{ post.title }}" class="img-fluid mx-auto d-block">
-        <div class="text-center pt-3 font-bold">
-            Post publicado por {{ post.author.name }} - {{ post.created }}
-        </div>
         <div class="text-center pt-2">
             {{ post.category }}
         </div>
@@ -33,6 +30,29 @@
                     </div>
                 </div>
             {% endfor %}
+        </div>
+        <div class="d-flex justify-content-center pt-3">
+            <div class="px-4">
+                <img src="{{ request.user.profile_picture.url }}" alt="Imagem do post {{ post.title }}"
+                     class="img-fluid rounded-circle" width="200">
+            </div>
+            <div class="card border-dark mb-3" style="max-width: 25rem;">
+                <div class="card-header bg-transparent border-dark">Post feito por {{ post.author.name }}</div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Publicado em {{ post.created }}
+                    </p>
+                    <p class="card-text">
+                        Minhas redes:
+                    </p>
+                    <div class="d-flex justify-content-around">
+                        <a href="https://twitter.com/{{ request.user.twitter }}" class="text-dark" target="_blank"> <i class="bi bi-twitter"></i></a>
+                        <a href="https://instagram.com/{{ request.user.instagram }}" class="text-dark" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="https://linkedin.com/{{ request.user.linkedin }}" class="text-dark" target="_blank"> <i class="bi bi-linkedin"></i></a>
+                        <a href="https://github.com/{{ request.user.github }}" class="text-dark" target="_blank"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div>
             <h5 class="pt-5">Faça um comentário: </h5>
