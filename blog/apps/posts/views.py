@@ -1,7 +1,10 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView
 
 from blog.apps.comments.form import CommentForm
 from blog.apps.pages.views import HomeView
@@ -77,3 +80,40 @@ class CategoryListView(HomeView):
             category__id=category_id
         )
         return query
+
+
+class PostManageView(ListView):
+    template_name = 'post/manage.html'
+    model = Post
+    paginate_by = 6
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user)
+
+
+class EditPostView(UpdateView):
+    template_name = 'post/edit.html'
+    model = Post
+    fields = ('title', 'content', 'description', 'category', 'image', 'is_published')
+    success_url = reverse_lazy('post:manage')
+
+    def dispatch(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=self.kwargs.get('pk'))
+        if post:
+            if post.author != request.user:
+                raise Http404()
+        return super().dispatch(request, *args, **kwargs)
+
+
+class DeletePostView(DeleteView):
+    template_name = 'post/delete.html'
+    model = Post
+    success_url = reverse_lazy('post:manage')
+
+    def dispatch(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=self.kwargs.get('pk'))
+        if post:
+            if post.author != request.user:
+                raise Http404()
+        return super().dispatch(request, *args, **kwargs)

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Gerenciar Posts
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-6">
+                    <div class="card border-dark my-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }} #{{ post.id }}</h5>
+                            <p class="card-text">Publicado no dia {{ post.created }}</p>
+                            <p class="card-text">{{ post.description }}</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'post:edit' post.pk %}">
+                                    <button class="btn btn-warning">Editar</button>
+                                </a>
+                                <a href="{% url 'post:delete' post.pk %}">
+                                    <button class="btn btn-danger">Excluir</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <h2 class="text-center pt-5">Você ainda não possui nenhum post publicado.</h2>
+            {% endfor %}
+        </div>
+        {% include 'parcials/_paginator.html' %}
+    </div>
+{% endblock %}

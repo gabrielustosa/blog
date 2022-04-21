@@ -34,5 +34,8 @@ class Post(Base):
     objects = models.Manager()
     published = PublishedManager()
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return self.title

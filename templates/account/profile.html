@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Perfil - {{ request.user.first_name }}
@@ -8,8 +9,13 @@
     <div class="container">
         <div class="row">
             <div class="col-2 pt-3">
-                <img src="{{ request.user.profile_picture.url }}" alt="Imagem do post {{ post.title }}"
-                     class="img-fluid rounded-circle" width="200">
+                {% if request.user.profile_picture %}
+                    <img src="{{ request.user.profile_picture.url }}" alt="Autor do post {{ post.title }}"
+                         class="img-fluid" width="200">
+                {% else %}
+                    <img src="{% static 'img/default_profile.png' %}" alt="Autor do post {{ post.title }}"
+                         class="img-fluid" width="200">
+                {% endif %}
             </div>
             <div class="col pt-3">
                 <h2>Informações do Usuário</h2>
@@ -45,9 +51,14 @@
                     <a href="{% url 'users:edit' %}">
                         <button class="btn btn-info mt-3">Editar Perfil</button>
                     </a>
-                    <a href="{% url 'post:create' %}">
-                        <button class="btn btn-warning mt-3">Criar Post</button>
-                    </a>
+                    <div>
+                        <a href="{% url 'post:manage' %}">
+                            <button class="btn btn-success mt-3">Gerenciar Posts</button>
+                        </a>
+                        <a href="{% url 'post:create' %}">
+                            <button class="btn btn-warning mt-3">Criar Post</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
