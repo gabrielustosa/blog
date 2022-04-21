@@ -35,7 +35,7 @@ class PostMixin:
         if author_data is None:
             author_data = {}
 
-        return Post.objects.create(
+        return Post.published.create(
             category=self.make_category(**category_data),
             author=self.make_author(**author_data),
             title=title,

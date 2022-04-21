@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
-from django.db.models import Q
 
 from blog.apps.comments.form import CommentForm
 from blog.apps.pages.views import HomeView
@@ -20,7 +19,7 @@ class PostDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post_id = self.kwargs.get('post_id')
-        post = Post.objects.get(id=post_id)
+        post = Post.published.get(id=post_id)
         context['post'] = post
         context['comments'] = Comment.objects.filter(post=post)
         context['form'] = self.form
@@ -65,7 +64,7 @@ class PostSearchView(HomeView):
         self.request.session['term'] = term
 
         self.request.session.save()
-        query = Post.objects.filter(
+        query = Post.published.filter(
             title__icontains=term
         )
         return query
@@ -74,7 +73,7 @@ class PostSearchView(HomeView):
 class CategoryListView(HomeView):
     def get_queryset(self, **kwargs):
         category_id = self.kwargs.get('category_id')
-        query = Post.objects.filter(
+        query = Post.published.filter(
             category__id=category_id
         )
         return query

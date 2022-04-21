@@ -8,3 +8,6 @@ class HomeView(ListView):
     model = Post
     paginate_by = 6
     context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.published.all()
