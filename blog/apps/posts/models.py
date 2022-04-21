@@ -3,6 +3,11 @@ from django.db import models
 from blog.apps.authors.models import User
 
 
+class PostManager(models.Manager):
+    def get_queryset(self):
+        return super(PostManager, self).get_queryset().filter(is_published=True)
+
+
 class Base(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -26,6 +31,7 @@ class Post(Base):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Categoria')
     image = models.ImageField(upload_to='posts/%Y/%m/%d/', verbose_name='Imagem')
     is_published = models.BooleanField(default=False, verbose_name='Publicar')
+    objects = PostManager()
 
     def __str__(self):
         return self.title

@@ -55,25 +55,26 @@ class PostCreateView(CreateView):
 
 
 class PostSearchView(HomeView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_queryset(self, **kwargs):
+        query = super().get_queryset()
         term = self.request.GET.get('term') or self.request.session['term']
+
+        if not term:
+            return query
 
         self.request.session['term'] = term
 
         self.request.session.save()
-        context['posts'] = Post.objects.filter(
-            Q(title__icontains=term) & Q(is_published=True)
+        query = Post.objects.filter(
+            title__icontains=term
         )
-        return context
+        return query
 
 
 class CategoryListView(HomeView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
+    def get_queryset(self, **kwargs):
         category_id = self.kwargs.get('category_id')
-        context['posts'] = Post.objects.filter(
-            Q(category__id=category_id) & Q(is_published=True)
+        query = Post.objects.filter(
+            category__id=category_id
         )
-        return context
+        return query
