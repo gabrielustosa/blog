@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -99,10 +100,9 @@ class EditPostView(UpdateView):
     success_url = reverse_lazy('post:manage')
 
     def dispatch(self, request, *args, **kwargs):
-        post = Post.objects.get(pk=self.kwargs.get('pk'))
-        if post:
-            if post.author != request.user:
-                raise Http404()
+        post = self.get_object()
+        if post.author != self.request.user:
+            raise Http404()
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -112,8 +112,7 @@ class DeletePostView(DeleteView):
     success_url = reverse_lazy('post:manage')
 
     def dispatch(self, request, *args, **kwargs):
-        post = Post.objects.get(pk=self.kwargs.get('pk'))
-        if post:
-            if post.author != request.user:
-                raise Http404()
+        post = self.get_object()
+        if post.author != self.request.user:
+            raise Http404()
         return super().dispatch(request, *args, **kwargs)
