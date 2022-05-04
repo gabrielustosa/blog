@@ -7,14 +7,24 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
-        <h2>Entrar</h2>
-        <form method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-                {% buttons %}
-                     <button type="submit" class="btn btn-primary">Logar</button>
-                {% endbuttons %}
-        </form>
-    </div>
+    <main class="container pt-5">
+        <div class="row justify-content-center">
+            <div class="col-4" style="width: 22rem;">
+                <h2 class="text-center">Entrar</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary btn-block mb-2" style="width: 20.5rem;">
+                            Logar
+                        </button>
+                    {% endbuttons %}
+                    <div class="text-center">
+                        <p>Não tem conta? <a class="text-decoration-none"
+                                             href="{% url 'users:register' %}">Registre-se</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 {% endblock %}

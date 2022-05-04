@@ -6,15 +6,20 @@
 {% endblock %}
 
 {% block content %}
-    {{ form.non_field_erros }}
-    <div class="container-fluid">
-        <h2>Cadastrar</h2>
-        <form method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary">Registrar</button>
-            {% endbuttons %}
-        </form>
-    </div>
+    <main class="container pt-5">
+        <div class="row justify-content-center">
+            <div class="col-4" style="width: 22rem;">
+                <h2 class="text-center">Registrar-se</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary btn-block mb-2" style="width: 20.5rem;">
+                            Registrar
+                        </button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </main>
 {% endblock %}
